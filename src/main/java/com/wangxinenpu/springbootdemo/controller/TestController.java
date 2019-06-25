@@ -3,6 +3,7 @@ package com.wangxinenpu.springbootdemo.controller;
 import com.wangxinenpu.springbootdemo.dataobject.SysUser;
 import com.wangxinenpu.springbootdemo.dataobject.Test;
 import com.wangxinenpu.springbootdemo.service.SysUserService;
+import com.wangxinenpu.springbootdemo.vo.ResultVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -33,9 +34,18 @@ public class TestController {
     }
 
     @RequestMapping(value = "mybtaisTest",method = RequestMethod.GET)
-    public Test mybtaisTest(@RequestParam(value = "id")Integer id){
-        Test sysUser=sysUserService.getById(id);
-        return sysUser;
+    public ResultVo<Test> mybtaisTest(@RequestParam(value = "id")Integer id){
+        ResultVo<Test> resultVo=new ResultVo<>();
+        try {
+            Test sysUser=sysUserService.getById(id);
+            resultVo.setSuccess(true);
+            resultVo.setResult(sysUser);
+        }catch (Exception e){
+            log.error("获取测试库数据异常",e);
+            resultVo.setResultDes("获取测试库数据异常");
+            resultVo.setCode("500");
+        }
+        return resultVo;
     }
 
     @RequestMapping(value = "redisTest",method = RequestMethod.GET)
