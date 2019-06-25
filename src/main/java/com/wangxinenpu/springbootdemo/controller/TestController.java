@@ -1,6 +1,7 @@
 package com.wangxinenpu.springbootdemo.controller;
 
 import com.wangxinenpu.springbootdemo.dataobject.SysUser;
+import com.wangxinenpu.springbootdemo.dataobject.Test;
 import com.wangxinenpu.springbootdemo.service.SysUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +33,8 @@ public class TestController {
     }
 
     @RequestMapping(value = "mybtaisTest",method = RequestMethod.GET)
-    public SysUser mybtaisTest(@RequestParam(value = "id")Integer id){
-        SysUser sysUser=sysUserService.getById(id);
+    public Test mybtaisTest(@RequestParam(value = "id")Integer id){
+        Test sysUser=sysUserService.getById(id);
         return sysUser;
     }
 
